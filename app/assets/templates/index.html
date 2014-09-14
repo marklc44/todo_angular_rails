@@ -1,1 +1,13 @@
-index.html
+<h1>TodoApp</h1>
+
+<form action="javascript:void(0)" ng-submit="addTask(newTask)">
+  <input type="text" ng-model="newTask.text">
+  <button>Add todo</button>
+</form>
+
+<ul>
+  <li ng-repeat="task in tasks">
+    <h3>{{task.text}}</h3>
+    <p>Complete: {{task.done}}</p>
+  </li>
+</ul>
