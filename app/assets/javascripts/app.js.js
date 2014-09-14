@@ -17,11 +17,29 @@ TodoApp.config([
 
 TodoApp.controller("TodoCtrl", [
   "$scope", "$http", function($scope, $http) {
-    return $scope.tasks = [
-      {
-        text: "Test task",
-        done: false
+    $scope.tasks = [];
+    $scope.allTasks = function() {
+      return $http.get('/tasks.json').success(function(data) {
+        return $scope.tasks = data;
+      });
+    };
+    $scope.allTasks();
+    $scope.addTask = function(task) {
+      return $http.post('/tasks.json', $scope.task).success(function(data) {
+        $scope.task = {};
+        $scope.tasks.unshift(data);
+        return console.log(data);
+      });
+    };
+    return $scope.deleteTask = function(task) {
+      var confirmDelete;
+      confirmDelete = confirm("Are you sure you want to delete this task?");
+      if (confirmDelete) {
+        return $http["delete"]("/tasks/" + task.id + ".json").success(function(data) {
+          console.log("task deleted: ", data);
+          return $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+        });
       }
-    ];
+    };
   }
 ]);

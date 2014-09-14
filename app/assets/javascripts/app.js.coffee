@@ -15,5 +15,24 @@ TodoApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
 
 TodoApp.controller "TodoCtrl", ["$scope", "$http", ($scope, $http) ->
 
-  $scope.tasks = [{text: "Test task", done: false}]
+  $scope.tasks = []
+
+  $scope.allTasks = ->
+    $http.get('/tasks.json').success (data) ->
+      $scope.tasks = data
+
+  $scope.allTasks()
+
+  $scope.addTask = (task) ->
+    $http.post('/tasks.json', $scope.task).success (data) ->
+      $scope.task = {}
+      $scope.tasks.unshift(data)
+      console.log(data)
+
+  $scope.deleteTask = (task) ->
+    confirmDelete = confirm "Are you sure you want to delete this task?"
+    if confirmDelete
+      $http.delete("/tasks/#{task.id}.json").success (data) ->
+        console.log("task deleted: ", data)
+        $scope.tasks.splice($scope.tasks.indexOf(task), 1)
 ]
