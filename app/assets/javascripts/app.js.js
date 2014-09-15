@@ -25,13 +25,13 @@ TodoApp.controller("TodoCtrl", [
     };
     $scope.allTasks();
     $scope.addTask = function(task) {
-      return $http.post('/tasks.json', $scope.task).success(function(data) {
-        $scope.task = {};
+      return $http.post('/tasks.json', $scope.newTask).success(function(data) {
+        $scope.newTask = {};
         $scope.tasks.unshift(data);
         return console.log(data);
       });
     };
-    return $scope.deleteTask = function(task) {
+    $scope.deleteTask = function(task) {
       var confirmDelete;
       confirmDelete = confirm("Are you sure you want to delete this task?");
       if (confirmDelete) {
@@ -40,6 +40,14 @@ TodoApp.controller("TodoCtrl", [
           return $scope.tasks.splice($scope.tasks.indexOf(task), 1);
         });
       }
+    };
+    return $scope.updateTask = function(task) {
+      return $http.put("/tasks/" + task.id + ".json", {
+        text: this.task.text,
+        done: this.task.done
+      }).success(function(data) {
+        return $scope.task = {};
+      });
     };
   }
 ]);

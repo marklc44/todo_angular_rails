@@ -24,8 +24,8 @@ TodoApp.controller "TodoCtrl", ["$scope", "$http", ($scope, $http) ->
   $scope.allTasks()
 
   $scope.addTask = (task) ->
-    $http.post('/tasks.json', $scope.task).success (data) ->
-      $scope.task = {}
+    $http.post('/tasks.json', $scope.newTask).success (data) ->
+      $scope.newTask = {}
       $scope.tasks.unshift(data)
       console.log(data)
 
@@ -35,4 +35,9 @@ TodoApp.controller "TodoCtrl", ["$scope", "$http", ($scope, $http) ->
       $http.delete("/tasks/#{task.id}.json").success (data) ->
         console.log("task deleted: ", data)
         $scope.tasks.splice($scope.tasks.indexOf(task), 1)
+
+  $scope.updateTask = (task) ->
+    $http.put("/tasks/#{task.id}.json", {text: @task.text, done: @task.done}).success (data) ->
+      $scope.task = {}
+
 ]

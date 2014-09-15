@@ -1,7 +1,7 @@
 <h1>TodoApp</h1>
 
-<form action="javascript:void(0)" ng-submit="addTask(task)">
-  <input type="text" ng-model="task.text">
+<form action="javascript:void(0)" ng-submit="addTask(newTask)">
+  <input type="text" ng-model="newTask.text">
   <button>Add todo</button>
 </form>
 
@@ -9,6 +9,11 @@
   <li ng-repeat="task in tasks">
     <h3>{{task.text}}</h3>
     <p>Complete: {{task.done}}</p>
+    <form action="javascript:void(0)" ng-submit="updateTask(task)">
+      <input type="text" ng-model="task.text">
+      <input type="checkbox" id="task-done" ng-model="task.done" unchecked><label for="task-done">Done</label></input>
+      <button>Update task</button>
+    </form>
     <button ng-click="deleteTask(task)">Remove task</button>
   </li>
 </ul>
