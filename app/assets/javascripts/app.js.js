@@ -18,6 +18,7 @@ TodoApp.config([
 TodoApp.controller("TodoCtrl", [
   "$scope", "$http", function($scope, $http) {
     $scope.tasks = [];
+    $scope.showEdit = [];
     $scope.allTasks = function() {
       return $http.get('/tasks.json').success(function(data) {
         return $scope.tasks = data;
@@ -27,8 +28,7 @@ TodoApp.controller("TodoCtrl", [
     $scope.addTask = function(task) {
       return $http.post('/tasks.json', $scope.newTask).success(function(data) {
         $scope.newTask = {};
-        $scope.tasks.unshift(data);
-        return console.log(data);
+        return $scope.tasks.unshift(data);
       });
     };
     $scope.deleteTask = function(task) {
@@ -36,10 +36,15 @@ TodoApp.controller("TodoCtrl", [
       confirmDelete = confirm("Are you sure you want to delete this task?");
       if (confirmDelete) {
         return $http["delete"]("/tasks/" + task.id + ".json").success(function(data) {
-          console.log("task deleted: ", data);
           return $scope.tasks.splice($scope.tasks.indexOf(task), 1);
         });
       }
+    };
+    $scope.editTask = function(index) {
+      return $scope.showEdit[index] = true;
+    };
+    $scope.closeEdits = function() {
+      return $scope.showEdit = [];
     };
     return $scope.updateTask = function(task) {
       return $http.put("/tasks/" + task.id + ".json", {
