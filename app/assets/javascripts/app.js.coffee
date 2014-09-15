@@ -36,6 +36,7 @@ TodoApp.controller "TodoCtrl", ["$scope", "$http", ($scope, $http) ->
         $scope.tasks.splice($scope.tasks.indexOf(task), 1)
 
   $scope.editTask = (index) ->
+    $scope.showEdit = []
     $scope.showEdit[index] = true
 
   $scope.closeEdits = ->
@@ -44,5 +45,6 @@ TodoApp.controller "TodoCtrl", ["$scope", "$http", ($scope, $http) ->
   $scope.updateTask = (task) ->
     $http.put("/tasks/#{task.id}.json", {text: @task.text, done: @task.done}).success (data) ->
       $scope.task = {}
+      $scope.showEdit = []
 
 ]

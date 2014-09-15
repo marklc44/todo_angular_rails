@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>TodoAngRails</title>
+  <link href='http://fonts.googleapis.com/css?family=Rock+Salt:400,700|Roboto' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="TodoApp">
 
-<div ng-view ng-click="closeEdits()"></div>
+<div class="todos" ng-view></div>
 
 </body>
 </html>

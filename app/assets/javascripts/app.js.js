@@ -41,6 +41,7 @@ TodoApp.controller("TodoCtrl", [
       }
     };
     $scope.editTask = function(index) {
+      $scope.showEdit = [];
       return $scope.showEdit[index] = true;
     };
     $scope.closeEdits = function() {
@@ -51,7 +52,8 @@ TodoApp.controller("TodoCtrl", [
         text: this.task.text,
         done: this.task.done
       }).success(function(data) {
-        return $scope.task = {};
+        $scope.task = {};
+        return $scope.showEdit = [];
       });
     };
   }

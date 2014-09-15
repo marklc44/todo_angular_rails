@@ -1,3 +1,142 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// colors
+$emerald: rgba(63, 195, 128, 1.0);
+$task-bg: rgba(108, 122, 137, 1.0);
+$lt-text: rgba(200, 247, 197, 1.0);
+$blue: rgba(107, 185, 240, 1.0);
+$ecstasy: rgba(249, 105, 14, 1.0);
+$purple: rgba(212, 130, 255, 1.0);
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: lighten($emerald, 30%);
+}
+.todos {
+  width: 80%;
+  margin: 0 auto;
+}
+input[type="text"] {
+  font-size: 1.5em;
+  appearance: none;
+  border: 2px solid lighten($task-bg, 30%);
+  background: lighten($task-bg, 40%);
+  border-radius: 4px;
+  color: darken($emerald, 10%);
+  outline: none;
+  padding: 0.15em;
+}
+header.page-header {
+  margin-bottom: 1em;
+  background: $emerald;
+  padding: 1em;
+  color: darken($purple, 20%);
+  input {
+    border: 2px solid darken($emerald, 10%);
+  }
+  .btn {
+    border: 2px solid darken($emerald, 10%);
+    background: darken($emerald, 30%);
+    position: relative;
+    top: -0.2em;
+    &:hover {
+      background: darken($emerald, 20%);
+    }
+  }
+}
+h1 {
+  font-family: 'Rock Salt', serif;
+  text-transform: uppercase;
+  .spaced {
+    letter-spacing: 8px;
+  }
+}
+
+.btn {
+  appearance: none;
+  font-size: 1em;
+  padding: 0.55em;
+  border-radius: 4px;
+  border: 1px solid lighten($task-bg, 20%);
+  background: lighten($task-bg, 10%);
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background: lighten($task-bg, 15%);
+  }
+}
+.todo-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  text-align: left;
+  color: $lt-text;
+  margin-bottom: 2em;
+}
+.task {
+  width:100%;
+  padding: 1em;
+  background: $task-bg;
+  border-bottom: 1px solid #999;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    background: darken($task-bg, 10%);
+  }
+  .task-static {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    .task-text {
+      width: 70%;
+      font-size: 1.5em;
+      padding: 0.25em 0.5em 0 0.5em;;
+      line-height: 1.5em;
+      float: left;
+    }
+    .task-done {
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      margin: 1.0em 0.5em 0 0.5em;
+      border: 2px solid $emerald;
+      float: right;
+      &.task-done-true {
+        background: $emerald;
+      }
+    }
+  }
+  .task-edit-form {
+    width: 100%;
+    float: left;
+    padding: 2.1em 0 0 0;
+    input[type="text"] {
+      font-size: 1.5em;
+      appearance: none;
+      border: 2px solid lighten($task-bg, 30%);
+      background: lighten($task-bg, 40%);
+      border-radius: 4px;
+      color: darken($emerald, 10%);
+      outline: none;
+      padding: 0.15em;
+    }
+  }
+  .remove-task {
+    float: right;
+    text-align: right;
+    display: block;
+    position: relative;
+    top: -2em;
+    right: 1em;
+  }
+}

@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   respond_to :json, :html
 
   def index
-    respond_with @tasks = Task.all.order('created_at')
+    respond_with @tasks = Task.all.order('created_at DESC')
   end
 
   def show

@@ -1,23 +1,26 @@
-<h1>TodoApp</h1>
+<header class="page-header">
+  <h1><span class="spaced">t'</span>done</h1>
 
-<form action="javascript:void(0)" ng-submit="addTask(newTask)">
-  <input type="text" ng-model="newTask.text">
-  <button>Add todo</button>
-</form>
+  <form action="javascript:void(0)" ng-submit="addTask(newTask)">
+    <input type="text" ng-model="newTask.text">
+    <button class="btn">Add todo</button>
+  </form>
+</header>
 
-<ul>
-  <li ng-repeat="task in tasks" class="done-{{task.done}}">
-    <div ng-dblclick="editTask($index)" ng-hide="showEdit[$index]">
-      <p>{{task.text}}</p>
-      <div class=>Complete: {{task.done}}</p>
+
+<ul class="todo-list">
+  <li class="task" ng-repeat="task in tasks" class="done-{{task.done}}">
+    <div class="task-static" ng-dblclick="editTask($index)" ng-hide="showEdit[$index]">
+      <div class="task-text">{{task.text}}</div>
+      <div class="task-done task-done-{{task.done}}"></div>
     </div>
-    <div class="edit-form" ng-show="showEdit[$index]">
+    <div class="task-edit-form" ng-show="showEdit[$index]">
       <form action="javascript:void(0)" ng-submit="updateTask(task)">
         <input type="text" ng-model="task.text" autofocus>
         <input type="checkbox" id="task-done" ng-model="task.done" unchecked><label for="task-done">Done</label></input>
-        <button>Update task</button>
+        <button class="btn">Update task</button>
       </form>
+      <button class="btn remove-task" ng-click="deleteTask(task)">Remove task</button>
     </div>
-    <button ng-click="deleteTask(task)">Remove task</button>
   </li>
 </ul>
